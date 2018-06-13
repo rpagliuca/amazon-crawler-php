@@ -1,0 +1,19 @@
+{
+    "name": "rpagliuca/amazon-crawler-php",
+    "authors": [
+        {
+            "name": "Rafael Santos",
+            "email": "rafael.santos.193@gmail.com"
+        }
+    ],
+    "require": {
+        "facebook/webdriver": "^1.6",
+        "php-di/php-di": "^6.0",
+        "doctrine/orm": "^2.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "RPagliuca\\AmazonCrawler\\": "src"
+        }
+    }
+}

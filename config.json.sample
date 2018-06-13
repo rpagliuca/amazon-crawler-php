@@ -1,0 +1,12 @@
+{
+    "db": {
+        "host": "172.18.0.2",
+        "port": "3306",
+        "user": "root",
+        "password": "root",
+        "name": "amazon_crawler"
+    },
+    "selenium": {
+        "host": "http://localhost:4444/wd/hub"
+    }
+}
