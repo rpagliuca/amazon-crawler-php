@@ -20,5 +20,11 @@ if (!empty($argv[1])) {
     $configuration->setSocksPort($argv[1]);
 }
 
-$app = $container->get('RPagliuca\AmazonCrawler\App');
-$app->run();
+try {
+    $app = $container->get('RPagliuca\AmazonCrawler\App');
+    $app->run();
+} catch (\Exception $e) {
+    /* Try to close webdriver if already opened, to avoid memory leak */
+    $container->get('RPagliuca\AmazonCrawler\WebDriver')->getDriver()->close();
+    throw $e;
+}
