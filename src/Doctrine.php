@@ -23,7 +23,7 @@ class Doctrine
     private function initializeEntityManager()
     {
         $doctrineIsDevMode = true;
-        $entitiesPath = [__DIR__ . "/entity"];
+        $entitiesPath = [__DIR__ . "/Entity"];
         $doctrineConfig = Setup::createAnnotationMetadataConfiguration(
             $entitiesPath,
             $doctrineIsDevMode,

@@ -11,14 +11,15 @@ class WebDriver
         Configuration $configuration
     ) {
         $this->configuration = $configuration;
+        $this->driver = RemoteWebDriver::create(
+            $this->configuration->get('selenium:host'),
+            DesiredCapabilities::chrome()
+        );
+        $this->driver->manage()->window()->maximize();
     }
 
     public function getDriver()
     {
-        $driver = RemoteWebDriver::create(
-            $this->configuration->get('selenium:host'),
-            DesiredCapabilities::chrome()
-        );
-        return $driver;
+        return $this->driver;
     }
 }
