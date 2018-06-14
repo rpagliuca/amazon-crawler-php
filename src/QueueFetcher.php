@@ -23,7 +23,7 @@ class QueueFetcher
             $item = $this->em->find('\RPagliuca\AmazonCrawler\Entity\Queue', $results[0]['id']);
             $item->setStatus('running');
             $item->setProcessId($processId);
-            $item->setLastModified(new \DateTime);
+            $item->setModifiedAt(new \DateTime);
             $this->em->flush();
         }
         $db->exec('COMMIT');

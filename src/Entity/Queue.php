@@ -29,14 +29,19 @@ class Queue
     private $status;
 
     /**
-     * @ORM\Column
+     * @ORM\Column(nullable=true)
      */
     private $processId;
 
     /**
      * @ORM\Column(type="datetime");
      */
-    private $lastModified;
+    private $modifiedAt;
+
+    /**
+     * @ORM\Column(type="datetime");
+     */
+    private $createdAt;
 
     /**
      * Get id.
@@ -123,23 +128,44 @@ class Queue
     }
 
     /**
-     * Get lastModified.
+     * Get modifiedAt.
      *
-     * @return lastModified.
+     * @return modifiedAt.
      */
-    public function getLastModified()
+    public function getModifiedAt()
     {
-        return $this->lastModified;
+        return $this->modifiedAt;
     }
 
     /**
-     * Set lastModified.
+     * Set modifiedAt.
      *
-     * @param lastModified the value to set.
+     * @param modifiedAt the value to set.
      */
-    public function setLastModified($lastModified)
+    public function setModifiedAt($modifiedAt)
     {
-        $this->lastModified = $lastModified;
+        $this->modifiedAt = $modifiedAt;
+        return $this;
+    }
+
+    /**
+     * Get createdAt.
+     *
+     * @return createdAt.
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * Set createdAt.
+     *
+     * @param createdAt the value to set.
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
         return $this;
     }
 }
