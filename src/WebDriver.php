@@ -13,9 +13,12 @@ class WebDriver
     ) {
         $options = new ChromeOptions();
         $options->addArguments([
-            '--proxy-server=socks4://127.0.0.1:9150',
+            '--proxy-server='
+                . $configuration->get('proxy:socks_host')
+                . ":"
+                . $configuration->get('proxy:socks_port'),
             '--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 '
-            . '(KHTML, like Gecko) Chrome/66.0.3359.181 Safari/537.36'
+                . '(KHTML, like Gecko) Chrome/66.0.3359.181 Safari/537.36'
         ]);
 
         $capabilities = DesiredCapabilities::chrome();

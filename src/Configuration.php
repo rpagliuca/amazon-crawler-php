@@ -21,4 +21,9 @@ class Configuration
         }
         return $value;
     }
+
+    public function setSocksPort($port)
+    {
+        $this->cfg['proxy']['socks_port'] = $port;
+    }
 }

@@ -15,5 +15,10 @@ $containerBuilder->addDefinitions([
 ]);
 $container = $containerBuilder->build();
 
+if (!empty($argv[1])) {
+    $configuration = $container->get('RPagliuca\AmazonCrawler\Configuration');
+    $configuration->setSocksPort($argv[1]);
+}
+
 $app = $container->get('RPagliuca\AmazonCrawler\App');
 $app->run();
