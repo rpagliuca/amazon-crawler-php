@@ -19,10 +19,20 @@ DataDirectory $TOR_FOLDER" | tor -f - > $TOR_LOG &
 TOR_PID=$!
 
 SUCCESS_MESSAGE="Tor has successfully opened a circuit. Looks like client functionality is working."
-echo "Waiting for Tor to initialize on port $SOCKS_PORT..."
+echo "Waiting for Tor ($TOR_PID) <$TOR_LOG> to initialize on port $SOCKS_PORT..."
+SECONDS=0
 while true; do
     if grep "$SUCCESS_MESSAGE" "$TOR_LOG"; then
         break
+    fi
+    if [ "$SECONDS" -gt 30 ]; then
+        echo "Timed out waiting for Tor ($TOR_PID) <$TOR_LOG> to initialize... Exiting..."
+        echo "Exiting Tor PID $TOR_PID..."
+        kill -s9 $TOR_PID
+        rm -rf "$TOR_LOG"
+        rm -rf "$TOR_FOLDER"
+        echo "Exited Tor."
+        exit 1
     fi
     sleep 1
 done
@@ -30,12 +40,11 @@ done
 echo "Tor has initialized."
 
 php "$DIR/../index.php" "$SOCKS_PORT"
-EXIT_STATUS=$?
 
 echo "Exiting Tor PID $TOR_PID..."
-kill $TOR_PID
+kill -s9 $TOR_PID
 rm -rf "$TOR_LOG"
 rm -rf "$TOR_FOLDER"
 echo "Exited Tor."
 
-exit $EXIT_STATUS
+exit 1
