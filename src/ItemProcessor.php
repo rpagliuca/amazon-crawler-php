@@ -9,13 +9,15 @@ class ItemProcessor
         Doctrine $doctrine,
         ItemParser $itemParser,
         DataPersister $dataPersister,
-        Configuration $configuration
+        Configuration $configuration,
+        Logger $logger
     ) {
         $this->webDriver = $webDriver;
         $this->em = $doctrine->getEntityManager();
         $this->itemParser = $itemParser;
         $this->dataPersister = $dataPersister;
         $this->configuration = $configuration;
+        $this->logger = $logger;
     }
 
     public function process($nextItem)
@@ -29,6 +31,7 @@ class ItemProcessor
     private function visit($nextItem)
     {
         $url = $this->configuration->get('target:domain') . $nextItem->getUrl();
+        $this->logger->log("Visiting $url...");
         $this->webDriver->getDriver()->get($url);
     }
 

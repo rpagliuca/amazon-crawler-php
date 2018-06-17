@@ -20,7 +20,7 @@ class App
         while (true) {
             $nextItem = $this->queueFetcher->fetchNext($processId);
             if (null !== $nextItem) {
-                $this->itemProcessor->process($nextItem);
+                $this->itemProcessor->process($nextItem, $processId);
             }
             sleep($this->configuration->get('system:sleep'));
         }

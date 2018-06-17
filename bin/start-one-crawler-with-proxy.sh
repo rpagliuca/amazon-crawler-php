@@ -28,7 +28,7 @@ while true; do
     if [ "$SECONDS" -gt 30 ]; then
         echo "Timed out waiting for Tor ($TOR_PID) <$TOR_LOG> to initialize... Exiting..."
         echo "Exiting Tor PID $TOR_PID..."
-        kill -s9 $TOR_PID
+        kill -s 9 $TOR_PID
         rm -rf "$TOR_LOG"
         rm -rf "$TOR_FOLDER"
         echo "Exited Tor."
@@ -42,7 +42,7 @@ echo "Tor has initialized."
 php "$DIR/../index.php" "$SOCKS_PORT"
 
 echo "Exiting Tor PID $TOR_PID..."
-kill -s9 $TOR_PID
+kill -s 9 $TOR_PID
 rm -rf "$TOR_LOG"
 rm -rf "$TOR_FOLDER"
 echo "Exited Tor."
