@@ -48,17 +48,17 @@ class ItemParser
 
             $allSuggestedUrls = $this->mergeUrls($suggestedUrls, $allSuggestedUrls);
 
-            $nextButton = $this->findVisibleElement('.a-carousel-goto-nextpage');
-            if (null === $nextButton) {
-                $this->logger->log('Breaking loop after next button not found...');
-                break;
-            }
-
             /* Close Kindle modal, if exists */
             $kindleModalClose = $this->findVisibleElement('.a-button-close');
             if (null !== $kindleModalClose) {
                 $this->logger->log('Closing Kindle modal...');
-                $kindleModalClose.click();
+                $this->click($kindleModalClose);
+            }
+
+            $nextButton = $this->findVisibleElement('.a-carousel-goto-nextpage');
+            if (null === $nextButton) {
+                $this->logger->log('Breaking loop after next button not found...');
+                break;
             }
 
             /* Click next button, to fetch more suggested links */
@@ -119,5 +119,14 @@ class ItemParser
             }
         }
         return null;
+    }
+
+    /* Javascript alternative for clicking an element,
+     * when Selenium driver native method does not work
+     */
+    private function click($element)
+    {
+        $driver = $this->webDriver->getDriver();
+        $driver->executeScript("arguments[0].click()", [$element]);
     }
 }
