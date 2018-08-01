@@ -4,6 +4,6 @@ namespace RPagliuca\AmazonCrawler\Repository;
 
 use Doctrine\ORM\EntityRepository;
 
-class Node extends EntityRepository
+class Queue extends EntityRepository
 {
 }

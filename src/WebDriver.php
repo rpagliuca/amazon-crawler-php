@@ -18,12 +18,12 @@ class WebDriver
             . '(KHTML, like Gecko) Chrome/66.0.3359.181 Safari/537.36',
         ]);
 
-        if ($configuration->get('proxy:socks_host')) {
+        if ($configuration->get('proxy:socks-host')) {
             $options->addArguments([
                 '--proxy-server='
-                . $configuration->get('proxy:socks_host')
+                . $configuration->get('proxy:socks-host')
                 . ":"
-                . $configuration->get('proxy:socks_port'),
+                . $configuration->get('proxy:socks-port'),
                 ]);
         }
 

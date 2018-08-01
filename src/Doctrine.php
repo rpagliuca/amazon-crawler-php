@@ -44,7 +44,8 @@ class Doctrine
             'password' => $this->configuration->get('db:password'),
             'driverOptions' => [
                 1002 => 'SET NAMES utf8'
-            ]
+            ],
+            'url' => $this->configuration->get('db:url')
         );
 
         $doctrineEntityManager = EntityManager::create($doctrineDbParams, $doctrineConfig);
