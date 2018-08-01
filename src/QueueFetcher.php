@@ -16,16 +16,16 @@ class QueueFetcher
     public function fetchNext($processId)
     {
         $db = $this->db;
-        $db->exec('START TRANSACTION');
+        $db->beginTransaction();
         $st = $db->prepare('
             SELECT id FROM Queue WHERE
-            attempts < :maxAttempts
+            (attempts < :maxAttempts OR attempts IS NULL)
             AND (
                 (status LIKE "new")
                 OR
                 (status LIKE "running" AND TIMESTAMPDIFF(SECOND, modifiedAt, :now) > :timeout)
-                ORDER BY id ASC LIMIT 0, 1 FOR UPDATE
             )
+            ORDER BY id ASC LIMIT 0, 1 FOR UPDATE
         ');
         $st->bindValue(':now', date('Y-m-d H:i:s'));
         $st->bindValue(':timeout', $this->configuration->get('system:queue-timeout', 120));
@@ -42,7 +42,11 @@ class QueueFetcher
             $item->setModifiedAt(new \DateTime);
             $this->em->flush();
         }
-        $db->exec('COMMIT');
-        return $item;
+        $success = $db->commit();
+        if ($success !== false) {
+            return $item;
+        } else {
+            return null;
+        }
     }
 }
