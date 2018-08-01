@@ -34,6 +34,11 @@ class Queue
     private $processId;
 
     /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $attempts;
+
+    /**
      * @ORM\Column(type="datetime");
      */
     private $modifiedAt;
@@ -166,6 +171,27 @@ class Queue
     public function setCreatedAt($createdAt)
     {
         $this->createdAt = $createdAt;
+        return $this;
+    }
+
+    /**
+     * Get attempts.
+     *
+     * @return attempts.
+     */
+    public function getAttempts()
+    {
+        return $this->attempts;
+    }
+
+    /**
+     * Set attempts.
+     *
+     * @param attempts the value to set.
+     */
+    public function setAttempts($attempts)
+    {
+        $this->attempts = $attempts;
         return $this;
     }
 }
