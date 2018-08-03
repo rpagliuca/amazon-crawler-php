@@ -24,8 +24,10 @@ class ItemProcessor
     {
         $this->visit($nextItem);
         $data = $this->itemParser->parse($nextItem);
+        $this->em->beginTransaction();
         $this->dataPersister->persistData($nextItem, $data);
         $this->flagAsProcessed($nextItem);
+        $this->em->commit();
     }
 
     private function visit($nextItem)
@@ -37,6 +39,7 @@ class ItemProcessor
 
     private function flagAsProcessed($nextItem)
     {
+        $nextItem->setModifiedAt(new \DateTime);
         $nextItem->setStatus('processed');
         $this->em->flush();
     }

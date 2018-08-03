@@ -23,7 +23,10 @@ class QueueFetcher
             AND (
                 (status LIKE "new")
                 OR
-                (status LIKE "running" AND TIMESTAMPDIFF(SECOND, modifiedAt, :now) > :timeout)
+                (
+                    status LIKE "running" AND
+                    TIMESTAMPDIFF(SECOND, modifiedAt, :now) > POWER(:timeout, (1 + 0.3 * (attempts - 1)))
+                )
             )
             ORDER BY id ASC LIMIT 0, 1 FOR UPDATE
         ');

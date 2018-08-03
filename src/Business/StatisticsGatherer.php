@@ -15,7 +15,14 @@ class StatisticsGatherer
         return [
             'queue' => $this->queueSummary(),
             'links' => $this->countAllLinks(),
-            'full-processed-links' => $this->countFullProcessedLinks()
+            'full-processed-links' => $this->countFullProcessedLinks(),
+            'recently-processed' => [
+                'ten-seconds' => $this->countProcessedLastSeconds(10),
+                'one-minute' => $this->countProcessedLastSeconds(60),
+                'five-minutes' => $this->countProcessedLastSeconds(5 * 60),
+                'thirty-minutes' => $this->countProcessedLastSeconds(30 * 60),
+                'one-day' => $this->countProcessedLastSeconds(24 * 60 * 60),
+            ]
         ];
     }
 
@@ -40,6 +47,18 @@ class StatisticsGatherer
                 INNER JOIN Node N2 ON N2.id = L.toNode_id AND N2.title IS NOT NULL
             ) TMP
         ');
+        return $st->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
+    public function countProcessedLastSeconds($seconds = 60)
+    {
+        $st = $this->db->prepare('
+            SELECT COUNT(*) as count FROM Queue WHERE status LIKE "processed"
+            AND TIMESTAMPDIFF(SECOND, modifiedAt, :now) <= :seconds
+        ');
+        $st->bindValue(':now', date('Y-m-d H:i:s'));
+        $st->bindValue(':seconds', $seconds);
+        $st->execute();
         return $st->fetchAll(\PDO::FETCH_ASSOC);
     }
 }
