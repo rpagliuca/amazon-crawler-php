@@ -24,7 +24,7 @@ class QueueFetcher
                 (status LIKE "new")
                 OR
                 (
-                    status LIKE "running" AND
+                    (status LIKE "running" OR status LIKE "failed") AND
                     TIMESTAMPDIFF(SECOND, modifiedAt, :now) > POWER(:timeout, (1 + 0.3 * (attempts - 1)))
                 )
             )
