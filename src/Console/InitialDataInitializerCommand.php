@@ -19,7 +19,7 @@ class InitialDataInitializerCommand extends Command
     protected function configure()
     {
         $this
-            ->setName('setup:insert-initial-data')
+            ->setName('setup-insert-initial-data')
             ->setDescription('Insert initial database rows for node 1')
         ;
     }

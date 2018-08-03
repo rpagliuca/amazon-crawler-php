@@ -19,7 +19,7 @@ class GetCsvCommand extends Command
     protected function configure()
     {
         $this
-            ->setName('links:get-as-csv')
+            ->setName('get-links-as-csv')
             ->setDescription('Get CSV containing all links between nodes')
         ;
     }
