@@ -24,10 +24,15 @@ class ItemProcessor
     {
         $this->visit($nextItem);
         $data = $this->itemParser->parse($nextItem);
-        $this->em->beginTransaction();
-        $this->dataPersister->persistData($nextItem, $data);
-        $this->flagAsProcessed($nextItem);
-        $this->em->commit();
+        try {
+            $this->em->beginTransaction();
+            $this->dataPersister->persistData($nextItem, $data);
+            $this->flagAsProcessed($nextItem);
+            $this->em->commit();
+        } catch (\Exception $e) {
+            $this->em->rollback();
+            throw $e;
+        }
     }
 
     private function visit($nextItem)
