@@ -5,7 +5,7 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 # Worker command
 CMD="/.$DIR/start-one-crawler-with-proxy.sh"
-NUM_WORKERS=20
+NUM_WORKERS=12
 
 i="0"
 while [ $i -lt $NUM_WORKERS ]
