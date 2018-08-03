@@ -43,4 +43,12 @@ class ItemProcessor
         $nextItem->setStatus('processed');
         $this->em->flush();
     }
+
+    public function flagAsFailed($nextItem, $failureType)
+    {
+        $nextItem->setModifiedAt(new \DateTime);
+        $nextItem->setStatus('failed');
+        $nextItem->setLastFailureType($failureType);
+        $this->em->flush();
+    }
 }

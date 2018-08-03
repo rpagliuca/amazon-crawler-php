@@ -29,6 +29,11 @@ class Queue
     private $status;
 
     /**
+     * @ORM\Column(type="text", nullable=true);
+     */
+    private $last_failure_type;
+
+    /**
      * @ORM\Column(nullable=true)
      */
     private $processId;
@@ -192,6 +197,27 @@ class Queue
     public function setAttempts($attempts)
     {
         $this->attempts = $attempts;
+        return $this;
+    }
+
+    /**
+     * Get last_failure_type.
+     *
+     * @return last_failure_type.
+     */
+    public function getLastFailureType()
+    {
+        return $this->last_failure_type;
+    }
+
+    /**
+     * Set last_failure_type.
+     *
+     * @param last_failure_type the value to set.
+     */
+    public function setLastFailureType($last_failure_type)
+    {
+        $this->last_failure_type = $last_failure_type;
         return $this;
     }
 }
