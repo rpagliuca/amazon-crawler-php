@@ -11,6 +11,7 @@ $application = new Application();
 
 /* Available commands */
 $application->add($container->get('\RPagliuca\AmazonCrawler\Console\GetCsvCommand'));
+$application->add($container->get('\RPagliuca\AmazonCrawler\Console\GetNodeCsv'));
 $application->add($container->get('\RPagliuca\AmazonCrawler\Console\InitialDataInitializerCommand'));
 $application->add($container->get('\RPagliuca\AmazonCrawler\Console\ShowStatisticsCommand'));
 
