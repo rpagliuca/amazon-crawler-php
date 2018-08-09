@@ -20,12 +20,50 @@ class ItemParser
     {
         $driver = $this->webDriver->getDriver();
 
-        $this->logger->log('Getting productTitle...');
+        $this->logger->log('Getting product title...');
+
+        /* Title is the only property that is required */
         $title = $driver->findElement(WebDriverBy::id('productTitle'))->getText();
+
         $this->logger->log('Getting author...');
-        $authors = $driver->findElement(WebDriverBy::className('author'))->getText();
-        $this->logger->log('Getting offer-price...');
-        $price = $driver->findElement(WebDriverBy::className('offer-price'))->getText();
+        try {
+            $authors = $driver->findElement(WebDriverBy::className('author'))->getText();
+        } catch (\Exception $e) {
+            $this->logger->log('Error fetching author...');
+            $authors = "<<MISSING_DATA>>";
+        }
+
+        $this->logger->log('Getting price...');
+        try {
+            $price = $driver->findElement(WebDriverBy::className('offer-price'))->getText();
+        } catch (\Exception $e) {
+            $this->logger->log('Error fetching price...');
+            $price = "<<MISSING_DATA>>";
+        }
+
+        $this->logger->log('Getting product details...');
+        try {
+            $details = $driver->findElement(WebDriverBy::cssSelector('#detail_bullets_id .bucket .content'))->getText();
+        } catch (\Exception $e) {
+            $this->logger->log('Error fetching details...');
+            $details = "<<MISSING_DATA>>";
+        }
+
+        $this->logger->log('Getting rating...');
+        try {
+            $rating = $driver->findElement(WebDriverBy::className('arp-rating-out-of-text'))->getText();
+        } catch (\Exception $e) {
+            $this->logger->log('Error fetching rating...');
+            $rating = "<<MISSING_DATA>>";
+        }
+
+        $this->logger->log('Getting review count...');
+        try {
+            $reviewCount = $driver->findElement(WebDriverBy::cssSelector('.a-size-medium.totalReviewCount'))->getText();
+        } catch (\Exception $e) {
+            $this->logger->log('Error fetching review count...');
+            $reviewCount = "<<MISSING_DATA>>";
+        }
         
         $allSuggestedUrls = [];
 
@@ -78,7 +116,10 @@ class ItemParser
             'title' => $title,
             'authors' => $authors,
             'price' => $price,
-            'suggested_urls' => $allSuggestedUrls
+            'suggested_urls' => $allSuggestedUrls,
+            'details' => $details,
+            'rating' => $rating,
+            'reviewCount' => $reviewCount
         ];
 
         return $data;

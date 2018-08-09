@@ -20,7 +20,9 @@ class NodesCsvPrinter
         $st = $this->db->prepare('
             SELECT id, title,
             REPLACE(REPLACE(price, "R$ ", ""), ",", ".") AS price,
-            CONCAT(:baseUrl, url) AS url FROM Node
+            CONCAT(:baseUrl, url) AS url,
+            Node.*
+            FROM Node
             WHERE Node.title IS NOT NULL
         ');
         $st->bindValue(':baseUrl', $baseUrl);

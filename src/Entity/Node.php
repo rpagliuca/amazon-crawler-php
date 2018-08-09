@@ -19,7 +19,7 @@ class Node
     private $id;
 
     /**
-     * @ORM\Column(nullable=true)
+     * @ORM\Column(type="text", nullable=true)
      */
     private $title;
 
@@ -29,9 +29,29 @@ class Node
     private $price;
 
     /**
-     * @ORM\Column
+     * @ORM\Column(type="text")
      */
     private $url;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $authors;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $details;
+
+    /**
+     * @ORM\Column(nullable=true)
+     */
+    private $rating;
+
+    /**
+     * @ORM\Column(nullable=true)
+     */
+    private $reviewCount;
 
     /**
      * Get id.
@@ -114,6 +134,90 @@ class Node
     public function setUrl($url)
     {
         $this->url = $url;
+        return $this;
+    }
+
+    /**
+     * Get authors.
+     *
+     * @return authors.
+     */
+    public function getAuthors()
+    {
+        return $this->authors;
+    }
+
+    /**
+     * Set authors.
+     *
+     * @param authors the value to set.
+     */
+    public function setAuthors($authors)
+    {
+        $this->authors = $authors;
+        return $this;
+    }
+
+    /**
+     * Get details.
+     *
+     * @return details.
+     */
+    public function getDetails()
+    {
+        return $this->details;
+    }
+
+    /**
+     * Set details.
+     *
+     * @param details the value to set.
+     */
+    public function setDetails($details)
+    {
+        $this->details = $details;
+        return $this;
+    }
+
+    /**
+     * Get rating.
+     *
+     * @return rating.
+     */
+    public function getRating()
+    {
+        return $this->rating;
+    }
+
+    /**
+     * Set rating.
+     *
+     * @param rating the value to set.
+     */
+    public function setRating($rating)
+    {
+        $this->rating = $rating;
+        return $this;
+    }
+
+    /**
+     * Get reviewCount.
+     *
+     * @return reviewCount.
+     */
+    public function getReviewCount()
+    {
+        return $this->reviewCount;
+    }
+
+    /**
+     * Set reviewCount.
+     *
+     * @param reviewCount the value to set.
+     */
+    public function setReviewCount($reviewCount)
+    {
+        $this->reviewCount = $reviewCount;
         return $this;
     }
 }

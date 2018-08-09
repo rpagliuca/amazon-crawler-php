@@ -17,10 +17,15 @@ class DataPersister
     public function persistData(Entity\Queue $item, $data)
     {
         /* Update root node */
-        $rootNode = $this->nodeRepository->findOneByUrl($item->getUrl());
-        $rootNode->setTitle($data['title']);
-        $rootNode->setPrice($data['price']);
-        $rootNode->setUrl($item->getUrl());
+        $rootNode = $this->nodeRepository->findOneByUrl($item->getUrl())
+            ->setTitle($data['title'])
+            ->setPrice($data['price'])
+            ->setUrl($item->getUrl())
+            ->setAuthors($data['authors'])
+            ->setDetails($data['details'])
+            ->setRating($data['rating'])
+            ->setReviewCount($data['reviewCount'])
+        ;
 
         /* Add child nodes if non-existant */
         if ($this->configuration->get('system:save-links', true)) {
