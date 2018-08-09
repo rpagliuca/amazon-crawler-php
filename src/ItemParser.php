@@ -43,6 +43,7 @@ class ItemParser
             $suggestedUrls = array_unique($matches[0]);
 
             if (!$this->hasNewSuggestedUrls($suggestedUrls, $allSuggestedUrls)) {
+                $this->logger->log('Finished getting list of suggested URLs.');
                 break;
             }
 
@@ -71,6 +72,8 @@ class ItemParser
             sleep($this->configuration->get('system:sleep'));
         }
         
+        $this->logger->log('Finished parsing item.');
+
         $data = [
             'title' => $title,
             'authors' => $authors,
