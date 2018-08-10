@@ -19,22 +19,13 @@ class NodesCsvPrinter
         $baseUrl = $this->configuration->get('target:domain');
         $st = $this->db->prepare('
             SELECT id, title,
-            REPLACE(REPLACE(price, "R$ ", ""), ",", ".") AS price,
             CONCAT(:baseUrl, url) AS url,
             authors,
-            rating,
-            reviewCount,
             coverType,
-            pages,
-            width,
-            height,
-            depth,
-            weight,
             publisher,
             edition,
             publicationDate,
             rankingCategory,
-            ranking,
             category1,
             category2,
             category3,
@@ -48,7 +39,17 @@ class NodesCsvPrinter
             isbn10,
             isbn13,
             language,
-            postProcessed
+            postProcessed,
+            REPLACE(REPLACE(REPLACE(price, "R$ ", ""), ".", ""), ",", ".") AS price,
+            REPLACE(ranking, ",", ".") ranking,
+            REPLACE(pages, ",", ".") pages,
+            REPLACE(reviewCount, ",", ".") reviewCount,
+            REPLACE(REPLACE(rating, " de 5 estrelas", ""), ",", ".") rating,
+            REPLACE(width, ",", ".") width,
+            REPLACE(height, ",", ".") height,
+            REPLACE(depth, ",", ".") depth,
+            REPLACE(weight, ",", ".") weight
+
             FROM Node
             WHERE Node.title IS NOT NULL
         ');
