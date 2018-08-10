@@ -174,6 +174,11 @@ class Node
     private $language;
 
     /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $postProcessed;
+
+    /**
      * Get id.
      *
      * @return id.
@@ -842,6 +847,27 @@ class Node
     public function setLanguage($language)
     {
         $this->language = $language;
+        return $this;
+    }
+
+    /**
+     * Get postProcessed.
+     *
+     * @return postProcessed.
+     */
+    public function getPostProcessed()
+    {
+        return $this->postProcessed;
+    }
+
+    /**
+     * Set postProcessed.
+     *
+     * @param postProcessed the value to set.
+     */
+    public function setPostProcessed($postProcessed)
+    {
+        $this->postProcessed = $postProcessed;
         return $this;
     }
 }
