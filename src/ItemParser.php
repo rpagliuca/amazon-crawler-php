@@ -71,8 +71,18 @@ class ItemParser
         while (true) {
             /* Get suggested link source code */
             $this->logger->log('Getting innerHTML for carousel...');
+
+            /* Frequently Bought Together Bundle */
+            /*
             $alsoBoughtSourceCode = $driver
-                ->findElement(WebDriverBy::id('anonCarousel1'))
+                ->findElement(WebDriverBy::cssSelector('form[name=BuyXGetYhandleBuy]'))
+                ->getAttribute('innerHTML')
+            ;
+             */
+
+            /* Updated on 2019-05-21 */
+            $alsoBoughtSourceCode = $driver
+                ->findElement(WebDriverBy::cssSelector('#desktop-dp-sims_purchase-similarities-sims-feature'))
                 ->getAttribute('innerHTML')
             ;
 

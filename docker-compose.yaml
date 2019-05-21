@@ -1,0 +1,11 @@
+version: "3.5"
+services:
+  crawler:
+    build: .
+    volumes:
+    - .:/app/
+  selenium-server:
+    image: selenium/standalone-chrome-debug
+  db:
+    image: mysql:5
+    env_file: env
