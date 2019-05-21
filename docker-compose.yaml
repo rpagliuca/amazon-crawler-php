@@ -1,15 +1,18 @@
 version: "3.5"
 services:
   crawler:
+    restart: always
     build: .
     env_file: env
     volumes:
     - ./crawler/:/app/
   selenium-server:
+    restart: always
     image: selenium/standalone-chrome-debug
     ports:
     - 5900:5900
   db:
+    restart: always
     image: mysql:5
     env_file: env
     volumes:
