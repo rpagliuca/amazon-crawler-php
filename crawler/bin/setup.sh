@@ -1,10 +1,10 @@
 # Wait for database to be up
 
-until [ "$(mysql -uroot -proot -hdb -e 'SHOW DATABASES')" ]; do
+until [ "$(mysql -u$DB_USER -p$DB_PASSWORD -h$DB_HOST -e 'SHOW DATABASES')" ]; do
     sleep 1
 done
 
-mysql -uroot -proot -hdb -e "CREATE DATABASE webcrawler;"
+mysql -u$DB_USER -p$DB_PASSWORD -h$DB_HOST -e "CREATE DATABASE $DB_NAME;"
 
 cd ..; vendor/bin/doctrine orm:schema-tool:update --force
 

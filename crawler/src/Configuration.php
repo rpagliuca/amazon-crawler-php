@@ -22,6 +22,10 @@ class Configuration
         foreach ($keys as $key) {
             if (isset($value[$key])) {
                 $value = $value[$key];
+                if (!is_array($value) and preg_match('~%env\((.+)\)%~', $value, $matches)) {
+                    $env = $matches[1];
+                    $value = getenv($env);
+                }
             } else {
                 if ($required) {
                     die("Error: Parameter $fullKey is not configured in config.json\n");
