@@ -6,6 +6,8 @@ services:
     - ./crawler/:/app/
   selenium-server:
     image: selenium/standalone-chrome-debug
+    ports:
+    - 5900:5900
   db:
     image: mysql:5
     env_file: env
