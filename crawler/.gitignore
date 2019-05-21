@@ -1,5 +1,4 @@
 /vendor/
-config.json
 /var/
 sample-problem-kindle-modal
 .php_cs.cache

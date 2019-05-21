@@ -1,0 +1,27 @@
+{
+    "db": {
+        "host": "%env(DB_HOST)%",
+        "port": "3306",
+        "user": "%env(DB_USER)%",
+        "password": "%env(DB_PASSWORD)%",
+        "name": "%env(DB_NAME)%"
+    },
+    "proxy": {
+        "socks-host": "socks4://crawler"
+    },
+    "selenium": {
+        "host": "http://selenium-server:4444/wd/hub"
+    },
+    "system": {
+        "sleep": 3,
+        "sleep-ajax": 1,
+        "max-attempts-per-node": 3,
+        "queue-timeout": 200,
+        "errors-in-a-row": 3,
+        "save-links": true
+    },
+    "target": {
+        "domain": "https://www.amazon.com.br",
+        "first-node": "/dp/0486469247/"
+    }
+}
