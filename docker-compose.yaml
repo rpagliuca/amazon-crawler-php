@@ -3,7 +3,7 @@ services:
   crawler:
     build: .
     volumes:
-    - .:/app/
+    - ./crawler/:/app/
   selenium-server:
     image: selenium/standalone-chrome-debug
   db:
