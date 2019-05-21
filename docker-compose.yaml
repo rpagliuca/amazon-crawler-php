@@ -3,11 +3,11 @@ services:
   crawler:
     build: .
     volumes:
-    - ./crawler/:/app/
+    - crawler:/app
   selenium-server:
     image: selenium/standalone-chrome-debug
   db:
     image: mysql:5
     env_file: env
     volumes:
-    - ./db/:/var/lib/mysql/
+    - db:/var/lib/mysql
