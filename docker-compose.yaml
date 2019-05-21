@@ -9,3 +9,5 @@ services:
   db:
     image: mysql:5
     env_file: env
+    volumes:
+    - ./db/:/var/lib/mysql/

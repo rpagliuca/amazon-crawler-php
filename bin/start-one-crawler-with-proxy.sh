@@ -14,7 +14,7 @@ done
 # Start Tor
 TOR_LOG=$(mktemp)
 TOR_FOLDER=$(mktemp)".d"
-echo "SocksPort $SOCKS_PORT
+echo "SocksPort 0.0.0.0:$SOCKS_PORT
 DataDirectory $TOR_FOLDER" | tor -f - > $TOR_LOG &
 TOR_PID=$!
 

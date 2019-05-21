@@ -4,3 +4,4 @@ config.json
 sample-problem-kindle-modal
 .php_cs.cache
 *.swp
+db
